@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 
 from pathlib import Path
-
+import dj_database_url
 import os
 import environ
 env = environ.Env()
@@ -33,7 +33,8 @@ SECRET_KEY = 'django-insecure-ant6j7))w)*4h2d7ov$vmzo5jso8=-#iq8-cmn@digv4q7h(q^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://library-management-9c19.onrender.com','https://*.127.0.0.1']
 
 
 # Application definition
@@ -91,11 +92,18 @@ WSGI_APPLICATION = 'library_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgres://library_management_n1tq_user:mIqU2wGxqB2JFyxhBcAfg3vwqASBA8ec@dpg-cnd7epda73kc73b67q3g-a.oregon-postgres.render.com/library_management_n1tq',
+    )
 }
 
 
