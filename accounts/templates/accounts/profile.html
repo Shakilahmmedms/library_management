@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- <div class="d-flex flex-wrap px-5">
+  {% for bk in buy_history%}
+  <div class="col-sm-3 mb-3 mb-sm-0">
+    <div class="card mx-2 my-2">
+      <div class="card-body">
+        <img src="{{bk.book.image.url}}" class="card-img-top" alt="picture">
+        <h5 class="card-title font-bold"><a class="text-decoration-none text-dark">{{bk.book.title}} </a></h5>
+        <p class="card-text ">{{bk.book.content | truncatewords:10}}</p>
+        <p class="card-text font-bold">Buy date :{{bk.buy_date}}</p>
+        <p>
+          Category: 
+          <button class="btn btn-primary btn-sm disabled m-1">
+            {{bk.book.category}}
+          </button>
+        </p>
+        <a href="{% url 'book_details' bk.id %}" class="btn btn-warning">View Details</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div> -->
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Book Name</th>
+      <th scope="col">Book Price</th>
+      <th scope="col">Cateogry </th>
+      <th scope="col">Buy Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  {% for dt in buy_history %}
+  <tbody>
+      <tr>
+        <th scope="row">{{dt.id}}</th>
+        <td>
+          {{dt.book.title}}
+        </td>
+        <td>{{dt.book.price}}</td>
+        <td>
+          {{dt.book.category}}
+        </td>
+        <td>{{dt.buy_date}}</td>
+        <td>
+          <a href="{% url 'return_book' dt.book.id %}" class="btn btn-warning">Return Book</a>
+        </td>
+      </tr>
+      
+    </tbody>
+  {% endfor %}
+</table>
+{% endblock %}
